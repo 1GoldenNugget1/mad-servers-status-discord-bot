@@ -1,0 +1,1 @@
+# mad-servers-status-discord-bot
