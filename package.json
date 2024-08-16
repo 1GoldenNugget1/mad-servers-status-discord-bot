@@ -1,0 +1,17 @@
+{
+  "name": "mad-servers-status-discord-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./index.mjs"
+  },
+  "repository": "https://github.com/1GoldenNugget1/mad-servers-status-discord-bot.git",
+  "author": "1GoldenNugget1 <76992055+1GoldenNugget1@users.noreply.github.com>",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.15.3",
+    "dotenv": "^16.4.5",
+    "nodemon": "^3.1.4",
+    "pretty-ms": "^9.1.0"
+  }
+}
