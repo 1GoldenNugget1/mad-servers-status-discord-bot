@@ -3,7 +3,7 @@ import { GatewayIntentBits,EmbedBuilder } from "discord.js";
 import DiscordJS from 'discord.js';
 import dotenv from 'dotenv';
 import  prettyMiliseconds from 'pretty-ms';
-
+import fetch  from 'node-fetch';
 
 dotenv.config()
 //setting up new discordjs client 
