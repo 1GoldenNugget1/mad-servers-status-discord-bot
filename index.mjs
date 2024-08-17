@@ -71,6 +71,7 @@ client.on('messageCreate', async (message) =>{
                 let ArmaName = data["data"]["attributes"]["name"];
                 let ArmaStatus = data["data"]["attributes"]["status"];
                 let ArmaStatusString;
+                
                 if(ArmaStatus == "online") ArmaStatusString = "🟢";
                 else if(ArmaStatus == "dead") ArmaStatusString = "🔴";
                 let ArmaPlayers = data["data"]["attributes"]["players"];
