@@ -3,7 +3,7 @@ import { GatewayIntentBits,EmbedBuilder } from "discord.js";
 import DiscordJS from 'discord.js';
 import dotenv from 'dotenv';
 import  prettyMiliseconds from 'pretty-ms';
-import BattleNode from 'battle-node';
+
 
 dotenv.config()
 //setting up new discordjs client 
@@ -15,13 +15,7 @@ const client = new DiscordJS.Client({
         GatewayIntentBits.GuildMembers
     ] 
 });
-//config for battle-node lib
-var configARMA = {
-    ip: '127.0.0.1',
-    port: process.env.armaPort,
-    rconPassword: process.env.armaPassword
-};
-  
+ 
 //setting up on ready  console message and bot status 
 client.on('ready', () =>{
     console.log('bot is active');
@@ -51,24 +45,11 @@ client.on('messageCreate', async (message) =>{
             )
             message.channel.send({embeds:[embed]});
             break;
-        //setting up 
-        case 'armastatus':
-            let bnode = new BattleNode(configARMA);
- 
-            bnode.login();
-             
-            bnode.on('login', function(err, success) {
-              
-              if (err) { console.log('Unable to connect to server.'); }
-             
-              if (success == true) {
-                console.log('Logged in RCON successfully.');
-              }
-              else if (success == false) {
-                console.log('RCON login failed! (password may be incorrect)');
-              }
+        //setting up  Arma3 & SE Servers status  command 
+        case 'status':
+           
                         
-            });
+            
 
 
 
