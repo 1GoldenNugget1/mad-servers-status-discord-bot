@@ -9,6 +9,7 @@
   "author": "1GoldenNugget1 <76992055+1GoldenNugget1@users.noreply.github.com>",
   "license": "MIT",
   "dependencies": {
+    "battle-node": "^0.1.2",
     "discord.js": "^14.15.3",
     "dotenv": "^16.4.5",
     "nodemon": "^3.1.4",
