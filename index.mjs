@@ -40,8 +40,8 @@ client.on('messageCreate', async (message) =>{
             .setFooter(footer)
             .setTimestamp()
             .addFields(
-                {name: '!help', value:'shows list of avail commands'},
-                {name: '!status', value:'shows status of our servers'},
+                {name: '$help', value:'shows list of avail commands'},
+                {name: '$status', value:'shows status of our servers'},
 
             )
             message.channel.send({embeds:[embed]});
@@ -94,8 +94,28 @@ client.on('messageCreate', async (message) =>{
             }catch(error) {
                 console.error('Error fetching data:', error);
                 message.reply('An error occurred while fetching data.');
-            } 
+            }
+            break;
             
+    case 'uptime':
+        //bot uptime command 
+        let upt = prettyMiliseconds(client.uptime,{compact: true});
+        let latency = client.ws.ping
+        let uptime  = new EmbedBuilder()
+        .setTitle('**BOT UPTIME AND LATENCY')
+        .setColor(embedColor)
+        .setTimestamp()
+        .setFooter(footer)
+        .setTimestamp()
+        .addFields(
+            {name: `:alarm_clock: Bots Latency:`,value:`${Math.round(latency)}ms`},
+            {name: "🤖 Uptime Bota:", value: `${upt}`}
+        )
+        message.channel.send({embeds:[uptime]});
+        break;
+    
+    
+
 
 
 
