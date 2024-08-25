@@ -24,12 +24,13 @@ client.on('ready', () =>{
 //creating  messageCreate  event listener and setting up command switch
 client.on('messageCreate', async (message) =>{
     if(message.author.bot) return;
-    if(!message.content.startsWith('$')) return;
+    if(!message.content.startsWith(prefix)) return;
 
     const args = message.content.slice(1).trim().split(/ +/);
     const command =  args.shift().toLocaleLowerCase();
     const embedColor = '#30b052'
     const footer = {text: 'test footer'};
+    const prefix = '$'
 
     switch(command){
         
@@ -40,12 +41,13 @@ client.on('messageCreate', async (message) =>{
             .setFooter(footer)
             .setTimestamp()
             .addFields(
-                {name: '$help', value:'shows list of avail commands'},
-                {name: '$status', value:'shows status of our servers'},
+                {name: `${prefix}help`, value:'shows list of avail commands'},
+                {name: `${prefix}status`, value:'shows status of our servers'},
 
             )
             message.channel.send({embeds:[embed]});
             break;
+        
         
         //setting up  Arma3 & SE Servers status  command 
         case 'status':
@@ -97,24 +99,73 @@ client.on('messageCreate', async (message) =>{
             }
             break;
             
-    case 'uptime':
-        //bot uptime command 
-        let upt = prettyMiliseconds(client.uptime,{compact: true});
-        let latency = client.ws.ping
-        let uptime  = new EmbedBuilder()
-        .setTitle('**BOT UPTIME AND LATENCY')
-        .setColor(embedColor)
-        .setTimestamp()
-        .setFooter(footer)
-        .setTimestamp()
-        .addFields(
-            {name: `:alarm_clock: Bots Latency:`,value:`${Math.round(latency)}ms`},
-            {name: "🤖 Uptime Bota:", value: `${upt}`}
-        )
-        message.channel.send({embeds:[uptime]});
+        case 'uptime':
+            //bot uptime command 
+            let upt = prettyMiliseconds(client.uptime,{compact: true});
+            let latency = client.ws.ping
+            let uptime  = new EmbedBuilder()
+            .setTitle('**BOT UPTIME AND LATENCY')
+            .setColor(embedColor)
+            .setTimestamp()
+            .setFooter(footer)
+            .setTimestamp()
+            .addFields(
+                {name: `:alarm_clock: Bots Latency:`,value:`${Math.round(latency)}ms`},
+                {name: "🤖 Uptime Bota:", value: `${upt}`}
+            )
+            message.channel.send({embeds:[uptime]});
         break;
+            
+       case 'ban':
+    // ban command setup
+    if (message.content.startsWith(`${prefix}ban`)) {
+        // Get the mentioned user from the message
+        const user = message.mentions.users.first();
     
+        // If a user was mentioned
+        if (user) {
+            // Get the member from the user
+            const member = message.guild.members.cache.get(user.id);
     
+            try {
+            // Ban the member and send a confirmation message
+            await member.ban();
+            message.reply(`${user.tag} was banned.`);
+            } catch (err) {
+            // Log any errors
+            console.error(err);
+            message.reply('failed to ban this user (check bot perms first)');
+            }
+        } else {
+            // If no user was mentioned
+            message.reply('you have to mention user to ban them ');
+        }
+        } 
+        break; 
+        
+        case 'kick':
+            const user = message.mentions.users.first();
+  
+            // If a user was mentioned
+            if (user) {
+              // Get the member from the user
+              const member = message.guild.members.cache.get(user.id);
+        
+              try {
+                // Kick the member and send a confirmation message
+                await member.kick();
+                message.reply(`${user.tag} was kicked.`);
+              } catch (err) {
+                // Log any errors
+                console.error(err);
+                message.reply('failed to kick this user (check bot perms first)');
+              }
+            } else {
+              // If no user was mentioned
+              message.reply('you have to mention user to kick them');
+            } 
+
+
 
 
 
